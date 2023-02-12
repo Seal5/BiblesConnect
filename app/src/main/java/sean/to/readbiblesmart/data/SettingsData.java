@@ -1,3 +1,7 @@
+/**
+ * read settting data from the setting file
+ * save setting data there
+*/
 package sean.to.readbiblesmart.data;
 
 import android.content.Context;
