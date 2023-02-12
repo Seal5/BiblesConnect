@@ -1,3 +1,7 @@
+/**
+ * create a custom adaptor for recyclerview
+ * bind viewholder with titles, verses, favorite counts and note counts
+*/
 package sean.to.readbiblesmart;
 
 import android.graphics.Typeface;
@@ -160,6 +164,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         else
             imageButton.setImageResource(R.drawable.ic_star_border_black_24dp);
     }
+    
+    /**
+     * update data for a cardview when changing searching keywords
+    */
     private void updateCardColor(CardView view, String name, ImageButton imageButton, Button notesButton){
         if(name.startsWith("[ESV]")){
             view.setCardBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.esv));
