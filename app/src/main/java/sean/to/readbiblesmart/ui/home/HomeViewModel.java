@@ -1,3 +1,6 @@
+/**
+ * view model (not used)
+*/
 package sean.to.readbiblesmart.ui.home;
 
 import androidx.lifecycle.LiveData;
