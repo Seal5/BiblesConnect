@@ -130,6 +130,9 @@ public class DashboardFragment extends Fragment {
             return view;
         }
     }
+    /**
+     * sync with the bible tab
+    */
     public void postBibleNames(int bibleNameIndex){
 
         FragmentManager ft = getActivity().getSupportFragmentManager();
