@@ -1,3 +1,7 @@
+/**
+ * bible data : name, chapter, verse
+ * how many chapters / verses
+*/
 package sean.to.readbiblesmart.data;
 
 public class BibleData {
