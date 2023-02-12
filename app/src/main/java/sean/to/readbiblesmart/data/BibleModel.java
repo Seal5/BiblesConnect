@@ -1,3 +1,9 @@
+/**
+ * bible data structure (class)
+ * name, version, title, body, id value
+ * get the index by a key having name/chapter/verse info
+ * get the max index of a certain bible or chapter or verse
+*/
 package sean.to.readbiblesmart.data;
 
 public class BibleModel {
