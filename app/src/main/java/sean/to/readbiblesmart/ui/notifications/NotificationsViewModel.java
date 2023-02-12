@@ -1,3 +1,6 @@
+/**
+ * not used
+*/
 package sean.to.readbiblesmart.ui.notifications;
 
 import androidx.lifecycle.LiveData;
