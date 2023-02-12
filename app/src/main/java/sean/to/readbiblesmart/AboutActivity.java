@@ -1,3 +1,7 @@
+/**
+ * introduction of this app
+ * display bible licenses statements
+*/
 package sean.to.readbiblesmart;
 
 import androidx.appcompat.app.ActionBar;
