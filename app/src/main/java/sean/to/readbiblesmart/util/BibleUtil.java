@@ -1,3 +1,7 @@
+/**
+ * parse a bible keyword
+ * read bible data from the JSON files in the asset folder
+*/
 package sean.to.readbiblesmart.util;
 
 import android.util.Log;
