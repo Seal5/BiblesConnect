@@ -1,3 +1,9 @@
+/**
+ * main activity class
+ * create fragments and lower buttons
+ * create listeners
+ * @author Sean Shin
+*/
 package sean.to.readbiblesmart;
 
 import android.app.Activity;
