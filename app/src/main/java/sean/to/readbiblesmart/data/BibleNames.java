@@ -1,3 +1,7 @@
+/**
+ * handle keys for a bible name
+ * use the same key in diffrent translation versons
+*/
 package sean.to.readbiblesmart.data;
 
 public class BibleNames {
