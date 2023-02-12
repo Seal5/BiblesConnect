@@ -1,3 +1,8 @@
+/**
+ * note data structure (class)
+ * writting date, key id , body content 
+ * key id : bible, chapter, verse combination
+*/
 package sean.to.readbiblesmart.data;
 
 public class NoteModel {
