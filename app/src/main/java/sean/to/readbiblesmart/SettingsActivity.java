@@ -1,3 +1,8 @@
+/**
+ * setting activity
+ * show you which bibles you are using (list)
+ * change the current settings and save them for the next 
+*/
 package sean.to.readbiblesmart;
 
 import android.content.Intent;
@@ -23,9 +28,13 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+ 
         initSettings();
     }
+    
+    /**
+     * read the current setting values
+    */
     public void initSettings(){
         boolean esv = MainActivity.settingsData.isSettings("esv");
         CheckBox esvCheck = (CheckBox)findViewById(R.id.esv);
@@ -52,6 +61,9 @@ public class SettingsActivity extends AppCompatActivity {
         frCheck.setChecked(fr);
     }
 
+    /** 
+     * not used
+    */
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
