@@ -1,3 +1,8 @@
+/**
+ * choose which bible you want
+ * sync with the selected bible in the bible tab
+ * use listview
+*/
 package sean.to.readbiblesmart.ui.dashboard;
 
 import android.content.Context;
@@ -33,16 +38,16 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        dashboardViewModel =
-//                ViewModelProviders.of(this).get(DashboardViewModel.class);
+        //        dashboardViewModel =
+        //                ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-//        final TextView textView = root.findViewById(R.id.text_dashboard);
-//        dashboardViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        //        final TextView textView = root.findViewById(R.id.text_dashboard);
+        //        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        //            @Override
+        //            public void onChanged(@Nullable String s) {
+        //                textView.setText(s);
+        //            }
+        //        });
 
         TextView textView = (TextView) root.findViewById(R.id.textView);
         textView.setText(R.string.biblenamelist);
@@ -52,12 +57,12 @@ public class DashboardFragment extends Fragment {
         ListAdapter listAdapter = new ListAdapter(root.getContext(), BibleData.bibleNames);
         listView.setAdapter(listAdapter);
 
-//        CheckedTextView textView = (CheckedTextView)root.findViewById(R.id.checkedTextView);
-//        for(int i =0; i< BibleData.bibleNames.length; i++){
-//            textView.setText(BibleData.bibleNames[i]);
-//        }
-//        textView.setCheckMarkDrawable(android.R.drawable.checkbox_on_background);
-//        textView.setChecked(true);
+        //        CheckedTextView textView = (CheckedTextView)root.findViewById(R.id.checkedTextView);
+        //        for(int i =0; i< BibleData.bibleNames.length; i++){
+        //            textView.setText(BibleData.bibleNames[i]);
+        //        }
+        //        textView.setCheckMarkDrawable(android.R.drawable.checkbox_on_background);
+        //        textView.setChecked(true);
 
         return root;
     }
@@ -100,12 +105,12 @@ public class DashboardFragment extends Fragment {
             checkedTextView.setText(names[position]);
 
 
-// perform on Click Event Listener on CheckedTextView
+            // perform on Click Event Listener on CheckedTextView
             checkedTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (checkedTextView.isChecked()) {
-// set cheek mark drawable and set checked property to false
+            // set cheek mark drawable and set checked property to false
                         value = "un-Checked";
                         checkedTextView.setCheckMarkDrawable(android.R.drawable.checkbox_off_background);
                         checkedTextView.setChecked(false);
@@ -113,13 +118,13 @@ public class DashboardFragment extends Fragment {
 
 
                     } else {
-// set cheek mark drawable and set checked property to true
+            // set cheek mark drawable and set checked property to true
                         value = "Checked";
                         checkedTextView.setCheckMarkDrawable(android.R.drawable.checkbox_on_background);
                         checkedTextView.setChecked(true);
                         postBibleNames(position);
                     }
-//                    Toast.makeText(context, "index "+position, Toast.LENGTH_SHORT).show();
+            //                    Toast.makeText(context, "index "+position, Toast.LENGTH_SHORT).show();
                 }
             });
             return view;
@@ -130,7 +135,7 @@ public class DashboardFragment extends Fragment {
         FragmentManager ft = getActivity().getSupportFragmentManager();
 
         FragmentTransaction fragmentTransaction =ft.beginTransaction();
-//        HomeFragment frag = (HomeFragment)ft.findFragmentById(R.id.navigation_home);
+            //        HomeFragment frag = (HomeFragment)ft.findFragmentById(R.id.navigation_home);
 
         if(MainActivity.homeFragment == null){
             MainActivity.homeFragment = new HomeFragment();
