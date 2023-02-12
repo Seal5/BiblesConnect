@@ -1,3 +1,6 @@
+/**
+ * caculate the height of the action bar
+*/
 package sean.to.readbiblesmart.util;
 
 import android.content.Context;
