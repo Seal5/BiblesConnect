@@ -1,3 +1,8 @@
+/**
+ * create a custom adaptor for the recyclerview in NotesActivity
+ * bind note data in viewholders (for notes list)
+ * implement add/delete funtion for notes list
+*/
 package sean.to.readbiblesmart;
 
 import android.util.Log;
@@ -21,6 +26,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         this.dataSet = data;
     }
 
+    /** 
+     * bind writing date and comments 
+    */
+    
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView, dateView;
 
