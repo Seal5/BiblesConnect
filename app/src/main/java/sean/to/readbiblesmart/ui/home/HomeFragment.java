@@ -1,3 +1,8 @@
+/**
+ * this is main fragment
+ * diplay a verse list
+ * a cardview has verse details which are title, body content, favorite mark, and note mark
+*/
 package sean.to.readbiblesmart.ui.home;
 
 import android.app.Activity;
@@ -80,10 +85,14 @@ public class HomeFragment extends Fragment {
     ArrayList<String> list;
     ArrayAdapter<String > listadapter;
 
-//    Timer timer;
-//    TimerTask timerTask;
-//    final Handler handler = new Handler();
+    //    Timer timer;
+    //    TimerTask timerTask;
+    //    final Handler handler = new Handler();
 
+    /**
+     * sync with the verse which you choose in the list tab
+     * call updateKeyword()
+    */
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -102,16 +111,16 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        homeViewModel =
-//                ViewModelProviders.of(this).get(HomeViewModel.class);
+        //        homeViewModel =
+        //                ViewModelProviders.of(this).get(HomeViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        //        final TextView textView = root.findViewById(R.id.text_home);
+        //        homeViewModel.getText().observe(this, new Observer<String>() {
+        //            @Override
+        //            public void onChanged(@Nullable String s) {
+        //                textView.setText(s);
+        //            }
+        //        });
 
 
         new Util().printLog("-----", "home:onCreateView");
@@ -123,39 +132,21 @@ public class HomeFragment extends Fragment {
         startIndex = 0;
         readBooksOrder();
 
-//        initBible();
-
-//        listView = (ListView) root.findViewById(R.id.lv1);
-//
-//        list = new ArrayList<>();
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Pineapple");
-//        list.add("Orange");
-//        list.add("Lychee");
-//        list.add("Gavava");
-//        list.add("Peech");
-//        list.add("Melon");
-//        list.add("Watermelon");
-//        list.add("Papaya");
-//
-//        listadapter = new ArrayAdapter<String>(root.getContext(), android.R.layout.simple_list_item_1,list);
-//        listView.setAdapter(listadapter);
-
+        //        initBible();
 
         editsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-//                if(list.contains(query)){
-//                    adapter.getFilter().filter(query);
-//                }else{
-//                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
-//                }
+                //                if(list.contains(query)){
+                //                    adapter.getFilter().filter(query);
+                //                }else{
+                //                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+                //                }
 
                 updateBible(query);
-//                displayBible(query);
-//                Toast.makeText(root.getContext(), query, Toast.LENGTH_LONG).show();
+                //                displayBible(query);
+                //                Toast.makeText(root.getContext(), query, Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -163,7 +154,7 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //    adapter.getFilter().filter(newText);
-//                updateBible(newText);
+                //                updateBible(newText);
                 return false;
             }
         });
@@ -172,31 +163,21 @@ public class HomeFragment extends Fragment {
 
         recyclerView = (RecyclerView) root.findViewById(R.id.my_recycler_view);
 
-//        recyclerView.setHasFixedSize(true);
+        //        recyclerView.setHasFixedSize(true);
 
-//        new Util().printLog("test", getActivity().toString());
-//        new Util().printLog("test", recyclerView.toString());
-//        new Util().printLog("test", root.toString());
-//        new Util().printLog("test", container.toString());
+        //        new Util().printLog("test", getActivity().toString());
+        //        new Util().printLog("test", recyclerView.toString());
+        //        new Util().printLog("test", root.toString());
+        //        new Util().printLog("test", container.toString());
 
         layoutManager = new LinearLayoutManager(getActivity());
-//        layoutManager = new LinearLayoutManager(recyclerView.getContext());
+        //        layoutManager = new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-
-
-
-//        for (int i = 0; i < BibleData.nameArray.length; i++) {
-//            data.add(new BibleModel(
-//                    BibleData.nameArray[i],
-//                    BibleData.versionArray[i],
-//                    BibleData.id_[i]
-////                    MyData.drawableArray[i]
-//            ));
-//        }
-
-//        removedItems = new ArrayList<Integer>();
-
+        /** 
+         * not happen to be in no keyword situation when launching
+         * use the previous keyword
+        */
         todayBible();
 
         if(MainActivity.previousQuery != null && MainActivity.previousQuery.length() > 0){
@@ -205,15 +186,16 @@ public class HomeFragment extends Fragment {
             showLicense();
 
 
-//        new Util().printLog("test", data.toString());
+        //        new Util().printLog("test", data.toString());
 
         adapter = new CustomAdapter(data);
         recyclerView.setAdapter(adapter);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
+        /**
+         * create fragments
+         */
         MainActivity.fragmentManager = getParentFragmentManager();
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this,
@@ -241,10 +223,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        setMargin(savedInstanceState);
+        //        setMargin(savedInstanceState);
 
         guideText();
-
 
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
@@ -289,27 +270,27 @@ public class HomeFragment extends Fragment {
         adapter.notifyItemRemoved(position);
     }
     private void readBooksOrder(){
-//        books.add("esv");
-//        books.add("kjv");
-//        books.add("niv");
-//        books.add("nlt");
+        //        books.add("esv");
+        //        books.add("kjv");
+        //        books.add("niv");
+        //        books.add("nlt");
 
         readBookOrder();
     }
 
-//    private void underlineButton(){
-//        Button button = (Button) getActivity().findViewById(R.id.historyBtn);
-//        if(button != null)
-//            button.setPaintFlags(button.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-//    }
+    //    private void underlineButton(){
+    //        Button button = (Button) getActivity().findViewById(R.id.historyBtn);
+    //        if(button != null)
+    //            button.setPaintFlags(button.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+    //    }
     private void starbutton(){
-//        imageButton = (ImageButton) getActivity().findViewById(R.id.favorate);
-//        imageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                v.getId
-//            }
-//        });
+        //        imageButton = (ImageButton) getActivity().findViewById(R.id.favorate);
+        //        imageButton.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //                v.getId
+        //            }
+        //        });
     }
     private void guideText(){
         TextView view = (TextView)getActivity().findViewById(R.id.guideMessage);
@@ -320,7 +301,7 @@ public class HomeFragment extends Fragment {
         final FrameLayout frameLayout = (FrameLayout)getActivity().findViewById(R.id.biblecard);
 
         if ((frameLayout != null)){
-//                && (savedInstanceState == null)) {
+            //                && (savedInstanceState == null)) {
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) frameLayout.getLayoutParams();
             //left, top, right, bottom
             params.setMargins(0, 0, 0, new ScreenUtil().getActionBarHeight(getContext()));
@@ -576,23 +557,23 @@ public class HomeFragment extends Fragment {
                 String tag = (String)v.getTag();
                 startNotes(tag);
             }else{
-//                Toast.makeText(context, "else",Toast.LENGTH_SHORT).show();
+                //                Toast.makeText(context, "else",Toast.LENGTH_SHORT).show();
             }
-//            removeItem(v);
-//            new Util().printLog("click", " " + v.getId());
-//            if(v.getId() == R.id.nextbtn){
-//                //Intent
-//                changeBible("next", previousQuery);
-//
-////                Toast.makeText(context, "next",Toast.LENGTH_LONG).show();
-//
-//            }else if(v.getId() == R.id.prebtn){
-//                changeBible("pre", previousQuery);
-//
-////                Toast.makeText(context, "pre",Toast.LENGTH_LONG).show();
-//            }else{
-//                Toast.makeText(context, "else",Toast.LENGTH_LONG).show();
-//            }
+                //            removeItem(v);
+                //            new Util().printLog("click", " " + v.getId());
+                //            if(v.getId() == R.id.nextbtn){
+                //                //Intent
+                //                changeBible("next", previousQuery);
+                //
+                ////                Toast.makeText(context, "next",Toast.LENGTH_LONG).show();
+                //
+                //            }else if(v.getId() == R.id.prebtn){
+                //                changeBible("pre", previousQuery);
+                //
+                ////                Toast.makeText(context, "pre",Toast.LENGTH_LONG).show();
+                //            }else{
+                //                Toast.makeText(context, "else",Toast.LENGTH_LONG).show();
+                //            }
         }
         public void changeStar(View v, boolean clickbtn){
 
@@ -681,29 +662,10 @@ public class HomeFragment extends Fragment {
         if(adapter != null)
             adapter.notifyDataSetChanged();
 
-//        MainActivity.previousQuery;
-//        if(previousQuery.length() == 0){
-//            String query = readBibleLast();
-//            String keyword = query;
-//            new Util().printLog("**read",query );
-////            displayBible(query);
-////            showLicense();
-//            updateKeyword(query);
-////            displayBible(keyword);
-////            removeMargin(null);
-////            startTimer();
-//
-//
-//        }else{
-//            updateKeyword(previousQuery);
-//        }
+
         if(data.size() == 0){ //editsearch.getQuery().length() == 0){
             showLicense();
         }
-//        else{
-//            updateBible(editsearch.getQuery().toString());
-//        }
-
 
 //        underlineButton();
         super.onStart();
@@ -732,63 +694,4 @@ public class HomeFragment extends Fragment {
         super.onDestroy();
     }
 
-//    public void startTimer() {
-//        //set a new Timer
-//        timer = new Timer();
-//
-//        //initialize the TimerTask's job
-//        initializeTimerTask();
-//
-//        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
-//        timer.schedule(timerTask, 5000, 10000); //
-//
-//        if(isLoadingDone())
-//            stoptimertask(null);
-//    }
-//
-//    public void stoptimertask(View v) {
-//        //stop the timer, if it's not already null
-//        if (timer != null) {
-//            timer.cancel();
-//            timer = null;
-//        }
-//    }
-//
-//    public void initializeTimerTask() {
-//
-//        timerTask = new TimerTask() {
-//            public void run() {
-//
-//                //use a handler to run a toast that shows the current timestamp
-//                handler.post(new Runnable() {
-//                    public void run() {
-////                        String query = readBibleLast();
-//                        updateKeyword(previousQuery);
-//                    }
-//                });
-//            }
-//        };
-//    }
-
 }
-
-
-//
-//<TextView
-//                        android:id="@+id/howManyNotes"
-//                                android:layout_width="wrap_content"
-//                                android:layout_height="wrap_content"
-//                                android:layout_gravity="right"
-//                                android:paddingRight="8dp"
-//
-//                                android:text="0"/>
-//
-//<ImageButton
-//                        android:id="@+id/noteBtn1"
-//                                android:layout_width="wrap_content"
-//                                android:layout_height="wrap_content"
-//                                android:layout_gravity="right"
-//                                android:background="@null"
-//                                android:paddingRight="32dp"
-//                                android:src="@drawable/ic_create_black_24dp" />
-//
