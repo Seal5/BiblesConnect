@@ -1,3 +1,10 @@
+/**
+ * create note activity 
+ * use recyclerview for multiple notes
+ * store notes in JSON object form 
+ * A search key consists of bible name, note count, note body
+ * need a delete funtion for notes
+*/
 package sean.to.readbiblesmart;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -170,6 +177,9 @@ public class NotesActivity extends AppCompatActivity {
         showHowmanycomments(data.size());
         MainActivity.notesData.delNotes(title, position);
     }
+    /** 
+     * read previous note list from a local JSON object file
+    */
     public ArrayList<NoteModel> readNotes(String tag, ArrayList<NoteModel> data){
         JSONObject result = MainActivity.notesData.getNotes(tag);
         new Util().printLog("---read---", MainActivity.notesData.notelist.toString());
@@ -207,6 +217,10 @@ public class NotesActivity extends AppCompatActivity {
 
     }
 
+    /** 
+     * fire a Intent when closing this note activity
+     * send the bible name,chapter and verse combination as a return value
+    */
     private void closeWithResult(){
         Intent resultIntent = new Intent();
         resultIntent.putExtra("title", title);
