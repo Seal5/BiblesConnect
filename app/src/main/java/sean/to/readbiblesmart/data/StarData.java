@@ -1,3 +1,8 @@
+/**
+ * put a favorite mark in a certain verse
+ * identify which translation version this favorite is for
+ * bible, chapter, verse and translation version
+*/
 package sean.to.readbiblesmart.data;
 
 import android.content.Context;
