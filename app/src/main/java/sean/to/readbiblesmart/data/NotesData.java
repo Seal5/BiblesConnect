@@ -1,3 +1,8 @@
+/**
+ * read note data from JSON object file
+ * add / delete notes in the note list
+ * caculate how many notes there are
+*/
 package sean.to.readbiblesmart.data;
 
 import android.content.Context;
