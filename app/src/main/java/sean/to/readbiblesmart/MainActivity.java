@@ -1,4 +1,5 @@
 /**
+ * The app is using card style of view fragment each verse in one mobile screen.
  * main activity class
  * create fragments and lower buttons
  * create listeners
@@ -82,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
+        
+        /**
+         * loading flag of all bible data files
+        */
         esvloadingdone = false;
         kjvloadingdone = false;
         nivloadingdone = false;
@@ -91,34 +96,20 @@ public class MainActivity extends AppCompatActivity {
 
         previousQuery = "";
 
+        /** favorite info each verses */
         starData = new StarData();
         starData.readStarData(context);
 
+        /** display which bibles are on the screen */
         settingsData = new SettingsData();
         settingsData.readSettingsData(context);
 
+        /** needed if the verses has any notes */
         notesData = new NotesData();
         notesData.readNoteData(context);
 
-
-//        ActionBar actionBar = getSupportActionBar();
-
-
-//        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-//                new ActivityResultContracts.StartActivityForResult(),
-//                new ActivityResultCallback<Instrumentation.ActivityResult>() {
-//                    @Override
-//                    public void onActivityResult(Instrumentation.ActivityResult result) {
-//                        if (result.getResultCode() == Activity.RESULT_OK) {
-//                            // There are no request codes
-//                            Intent data = result.getData();
-//                            doSomeOperations();
-//                        }
-//                    }
-//                });
-
-
-//        initBible();
+        /** need asynchronous file loading */
+        //        initBible();
         AsyncInitBible();
 
 
@@ -150,12 +141,14 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //        );
 
+        
+        /** create lower navigation bar ui */
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
 
-// after setupWithNavController
+        // after setupWithNavController
         navView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -209,14 +202,11 @@ public class MainActivity extends AppCompatActivity {
             activateFragment(R.id.navigation_home);
         }
     }
+    /**
+     * decide which fragements are diplayed
+    */
     public void activateFragment(int rId){
-//        GalleryFragment frag = new GalleryFragment();
-//        FragmentManager ft = getFragmentManager();
-//        FragmentTransaction fragmentTransaction =ft.beginTransaction();
-//        fragmentTransaction.replace(R.id.home, frag);
-//        // ft.addToBackStack(null);
-//        fragmentTransaction.commit();
-//        DashboardFragment frag = new DashboardFragment();
+
         FragmentManager ft = getSupportFragmentManager();
 
         FragmentTransaction fragmentTransaction =ft.beginTransaction();
@@ -267,12 +257,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public FragmentTransaction saveTransaction(FragmentTransaction fragmentTransaction,String tag){
         //        fragmentTransaction.add(R.id.navigation_dashboard, frag);
-//        fragmentTransaction.setReorderingAllowed(true);
-//        fragmentTransaction.addToBackStack(tag);
+        //        fragmentTransaction.setReorderingAllowed(true);
+        //        fragmentTransaction.addToBackStack(tag);
 
         // ft.addToBackStack(null);
         fragmentTransaction.commit();
-//        Toast.makeText(context, "new",Toast.LENGTH_LONG).show();
+
         return fragmentTransaction;
     }
 
@@ -287,6 +277,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    /**
+     * loading bible files
+    */
     public void AsyncInitBible(){
         AsyncBibleLoading asyncBibleLoading1 = new AsyncBibleLoading();
         asyncBibleLoading1.execute("esv");
@@ -326,16 +319,16 @@ public class MainActivity extends AppCompatActivity {
     }
     private void sendMessageToFragment(String action,String key){
         FragmentManager manager = this.getSupportFragmentManager();
-//
-//        HomeFragment myFragment = (HomeFragment) manager.findFragmentById(R.id.navigation_home);
-//        List<Fragment> fragments = manager.getFragments();
-//        Fragment lastFragment = fragments.get(fragments.size() - 1);
-//
-//
-//        if(myFragment != null)
-//            myFragment.changeBible(action);
-//        else
-//            Toast.makeText(context, "fragment is null",Toast.LENGTH_LONG).show();
+        //
+        //        HomeFragment myFragment = (HomeFragment) manager.findFragmentById(R.id.navigation_home);
+        //        List<Fragment> fragments = manager.getFragments();
+        //        Fragment lastFragment = fragments.get(fragments.size() - 1);
+        //
+        //
+        //        if(myFragment != null)
+        //            myFragment.changeBible(action);
+        //        else
+        //            Toast.makeText(context, "fragment is null",Toast.LENGTH_LONG).show();
 
         Bundle result = new Bundle();
         result.putString(key, action);
@@ -345,54 +338,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu, menu);
-//        MenuItem searchViewItem = menu.findItem(R.id.app_bar_search);
-//        final SearchView searchView = (SearchView) searchViewItem.getActionView();
-//        searchView.setQuery("Genesis 1 1", false);
-////                (SearchView) MenuItemCompat.getActionView(searchViewItem);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                searchView.clearFocus();
-//
-//                activateFragment(R.id.navigation_home);
-//                sendQueryToFragment(query);
-////                homeFragment.updateBible(query);
-////                selectItem(R.id.navigation_home);
-//
-//
-//             /*   if(list.contains(query)){
-//                    adapter.getFilter().filter(query);
-//                }else{
-//                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
-//                }*/
-//                return false;
-//
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-////                adapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
-//        return super.onCreateOptionsMenu(menu);
-//    }
-    //
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        // REQUEST_CODE is defined above
-//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-//            // Extract name value from result extras
-//            String name = data.getExtras().getString("name");
-//            int code = data.getExtras().getInt("code", 0);
-//            // Toast the name to display temporarily on screen
-//            Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-//        }
-//    }
+
 
     @Override
     protected void onStart() {
@@ -434,16 +380,16 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.aboutBtn:
                 startAbout();
-//                startNotes();
+    //                startNotes();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
     private void startSettings(){
         Intent intent = new Intent(this, SettingsActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
+        //        EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
+        //        String message = editText.getText().toString();
+        //        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
     private void startAbout(){
@@ -452,10 +398,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void startNotes(){
-//        Intent intent = new Intent(this, NotesActivity.class);
-//        startActivity(intent);
-//    }
+    //    public void startNotes(){
+    //        Intent intent = new Intent(this, NotesActivity.class);
+    //        startActivity(intent);
+    //    }
+    
+    /**
+     * loading bible files asynchronously
+    */
     private class AsyncBibleLoading extends AsyncTask<String,String, JSONObject>{
         @Override
         protected void onPreExecute() {
@@ -509,7 +459,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
+        /**
+         * notify if the asynchronous loading is done
+        */
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
