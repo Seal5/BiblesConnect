@@ -1,3 +1,7 @@
+/**
+ * create favorite tab
+ * use chip ui
+*/
 package sean.to.readbiblesmart.ui.notifications;
 
 import android.content.Intent;
@@ -51,25 +55,15 @@ public class NotificationsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        notificationsViewModel =
-//                ViewModelProviders.of(this).get(NotificationsViewModel.class);
+        //        notificationsViewModel =
+        //                ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
-//        final TextView textlabelView = root.findViewById(R.id.notelabel);
+        //        final TextView textlabelView = root.findViewById(R.id.notelabel);
         Button showNotes = root.findViewById(R.id.addNotes);
         this.root = root;
 
         showFavorite(root, textView);
-
-//        textView.setText(getResources().getString(R.string.myself)
-//        + "\n\n" + getResources().getString(R.string.license_overview)
-//        + "\n\n" + getResources().getString(R.string.license));
-//        notificationsViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
 
         textView.setMovementMethod(new ScrollingMovementMethod());
 
@@ -91,22 +85,22 @@ public class NotificationsFragment extends Fragment {
     }
     public void showFavorite(final View view, TextView textView){
         final ChipGroup chipGroup = view.findViewById(R.id.tag_group);
-//        final TextView textlabelView = view.findViewById(R.id.notelabel);
+        //        final TextView textlabelView = view.findViewById(R.id.notelabel);
         final Button showNotes = view.findViewById(R.id.addNotes);
-//        JSONObject object = new JSONObject(json);
-//        Iterator keys = object.keys();
-//        while(keys.hasNext()) {
-//            String dynamicKey = (String)keys.next();
-//            JSONObject line = object.getJSONObject(dynamicKey);
-//            String desc = line.getString("desc");
-//        }
+        //        JSONObject object = new JSONObject(json);
+        //        Iterator keys = object.keys();
+        //        while(keys.hasNext()) {
+        //            String dynamicKey = (String)keys.next();
+        //            JSONObject line = object.getJSONObject(dynamicKey);
+        //            String desc = line.getString("desc");
+        //        }
 
-//        for(String key : jsonObject.keySet())
+        //        for(String key : jsonObject.keySet())
         Iterator keys = MainActivity.starData.starList.keys();
         int chips = 0;
         while(keys.hasNext()) {
             String dynamicKey = (String)keys.next();
-//            Chip chip = new Chip(view.getContext());
+            //            Chip chip = new Chip(view.getContext());
             Chip chip = (Chip) getLayoutInflater().inflate(R.layout.chip_view, chipGroup, false);
 
 
@@ -137,21 +131,21 @@ public class NotificationsFragment extends Fragment {
 
         }
 
-//        ImageButton showNotes = view.findViewById(R.id.addNotes);
+        //        ImageButton showNotes = view.findViewById(R.id.addNotes);
 
         if(chips == 0){
             chipGroup.setVisibility(View.GONE);
             showNotes.setVisibility(View.GONE);
-//            textlabelView.setVisibility(View.GONE);
+            //            textlabelView.setVisibility(View.GONE);
             textView.setText("No favorites yet. Please press star buttons when you find good verses.");
             hideNotes(showNotes);
         }else {
             chipGroup.setVisibility(View.VISIBLE);
             showNotes.setVisibility(View.VISIBLE);
-//            textlabelView.setVisibility(View.VISIBLE);
+            //            textlabelView.setVisibility(View.VISIBLE);
             showNotes(showNotes);
         }
-//        hideNotes(textlabelView,showNotes);
+        //        hideNotes(textlabelView,showNotes);
     }
     private void callNotesActivity(String title){
         if(title == null){
@@ -163,11 +157,11 @@ public class NotificationsFragment extends Fragment {
         startActivity(intent);
     }
     private void hideNotes(Button view){
-//        text.setVisibility(View.GONE);
+        //        text.setVisibility(View.GONE);
         view.setVisibility(View.GONE);
     }
     private void showNotes(Button view){
-//        text.setVisibility(View.VISIBLE);
+        //        text.setVisibility(View.VISIBLE);
         view.setVisibility(View.VISIBLE);
     }
 
@@ -180,16 +174,16 @@ public class NotificationsFragment extends Fragment {
     private void checkChipStatus(){
         final ChipGroup chipGroup = root.findViewById(R.id.tag_group);
 
-//        Iterator keys = MainActivity.starData.starList.keys();
-//        int chips = 0;
-//        while(keys.hasNext()) {
-//            String dynamicKey = (String) keys.next();
-//
-//            if (!MainActivity.starData.isStar(dynamicKey)) {
-//               chipGroup.get
-//            }
-//            chips++;
-//        }
+        //        Iterator keys = MainActivity.starData.starList.keys();
+        //        int chips = 0;
+        //        while(keys.hasNext()) {
+        //            String dynamicKey = (String) keys.next();
+        //
+        //            if (!MainActivity.starData.isStar(dynamicKey)) {
+        //               chipGroup.get
+        //            }
+        //            chips++;
+        //        }
 
         for (int i = 0; i < chipGroup.getChildCount(); i++) {
             Chip chip = ((Chip) chipGroup.getChildAt(i));
@@ -226,53 +220,4 @@ public class NotificationsFragment extends Fragment {
             }
         });
     }
-    //    public String readVerse(String query){
-//        String book = "esv";
-//        String title = query;
-//        int index = 6;
-//        if(query.startsWith("[ESV]")){
-//            query = query.substring(index);
-//            new Util().printLog("=========",query);
-//        }
-//        if(query.startsWith("[KJV]")){
-//            query = query.substring(index);
-//            book = "kjv";
-//            new Util().printLog("=========",query);
-//        }
-//        if(query.startsWith("[NIV]")){
-//            query = query.substring(index);
-//            book = "niv";
-//            new Util().printLog("=========",query);
-//        }
-//        if(query.startsWith("[NLT]")){
-//            query = query.substring(index);
-//            book = "nlt";
-//            new Util().printLog("=========",query);
-//        }
-//        String[] result = new BibleUtil().parseQuery(query);
-//        String body = new BibleUtil().readBible(book,result[0], result[1], result[2]);
-//
-//        return title + "\n\n"+ body;
-//    }
-}
-
-//
-//<TextView
-//            android:id="@+id/notelabel"
-//                    android:layout_width="wrap_content"
-//                    android:layout_height="wrap_content"
-//                    android:layout_gravity="left"
-//                    android:layout_marginStart="8dp"
-//                    android:layout_marginTop="8dp"
-//                    android:layout_marginRight="8dp"
-//                    android:layout_marginBottom="8dp"
-//                    android:textColor="@color/colorBlue"
-//
-//                    android:text="0 notes" />
-//<ImageButton
-//            android:id="@+id/addNotes1"
-//                    android:layout_width="40dp"
-//                    android:layout_height="40dp"
-//                    android:layout_alignParentRight="true"
-//                    android:background="@null"
-//                    android:src="@drawable/ic_create_black_24dp" />
+    
